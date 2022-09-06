@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31402.337
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClipCreator", "ClipCreator.csproj", "{F34EAFE3-CF98-40DB-A0DC-B0BB4D00A013}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F34EAFE3-CF98-40DB-A0DC-B0BB4D00A013}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F34EAFE3-CF98-40DB-A0DC-B0BB4D00A013}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F34EAFE3-CF98-40DB-A0DC-B0BB4D00A013}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F34EAFE3-CF98-40DB-A0DC-B0BB4D00A013}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2CDC833A-C24D-4CC7-8560-1C627A2801BC}
+	EndGlobalSection
+EndGlobal
