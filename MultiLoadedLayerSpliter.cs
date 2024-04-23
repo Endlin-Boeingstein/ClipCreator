@@ -24,8 +24,12 @@ class MultiLoadedLayerSpliter
             this.mllsrecord = mllsrecord;
             //创建路径文件夹实例
             DirectoryInfo TheFolder = new DirectoryInfo(Fpath);
+            //创建文件数组
+            FileInfo[] files = TheFolder.GetFiles();
+            //为文件数组排序
+            Array.Sort(files, new FileNameSort());
             //遍历文件夹内文件
-            foreach (FileInfo NextFile in TheFolder.GetFiles())
+            foreach (FileInfo NextFile in files)
             {
                 //判定是否存在引用多位图/元件的a元件
                 if (this.mllsrecord.Contains(NextFile.Name.Substring(0, NextFile.Name.Length - 4)))
@@ -85,6 +89,8 @@ class MultiLoadedLayerSpliter
 
                             if (dbia.Count != 1||(dbia.Count == 1 && som>1))
                             {
+                                //记录图层序号
+                                int layernum = 0;
                                 //将每帧的第n位图提出来放在新图层里
                                 for (int t = 0; t < dbia.Count; t++)
                                 {
@@ -94,8 +100,8 @@ class MultiLoadedLayerSpliter
                                     XmlElement addDOMLayer = xmlDoc.CreateElement("DOMLayer", xmlDoc.DocumentElement.NamespaceURI);
                                     //预置addframes节点
                                     XmlElement addframes = xmlDoc.CreateElement("frames", xmlDoc.DocumentElement.NamespaceURI);
-                                    //设name为DOMLayer的name值
-                                    addDOMLayer.SetAttribute("name", DOMLayer.GetAttribute("name") + "_" + t);
+                                    //设name为DOMLayer的name值（此处会出现极大卡顿，暂无法修复）
+                                    addDOMLayer.SetAttribute("name", DOMLayer.GetAttribute("name") + "_" + layernum);
                                     //将addframes作为addDOMLayer的子节点
                                     addDOMLayer.AppendChild(addframes);
                                     //判断是否存在DOMBitmapInstance，以判定是否引用位图
@@ -154,6 +160,8 @@ class MultiLoadedLayerSpliter
                                     //保存xml
                                     xmlDoc.Save(NextFile.FullName);
                                     Console.WriteLine("已提取" + NextFile.Name.Substring(0, NextFile.Name.Length - 4) + "元件的" + DOMLayer.GetAttribute("name") + "图层的位图" + dbia[t].ToString() + "并新建图层");
+                                    //增加序号
+                                    layernum++;
                                     //新功能更新而停用//刷新数组
                                     //新功能更新而停用///dbia[t] = null;
                                     //判断是否重置t
@@ -169,10 +177,14 @@ class MultiLoadedLayerSpliter
                             //确定创建完毕并删除旧图层
                             if (dbia.Count != 0 && (dbia.Count != 1 || (dbia.Count == 1 && som > 1)))
                             {
-                                //移除旧图层
-                                root.FirstChild.FirstChild.FirstChild.RemoveChild(DOMLayer);
-                                //重置计数器
-                                a = 0;
+                                if(DOMLayer.GetElementsByTagName("DOMBitmapInstance").Count == 0)
+                                {
+                                    //移除旧图层
+                                    root.FirstChild.FirstChild.FirstChild.RemoveChild(DOMLayer);
+                                    //重置计数器
+                                    a = 0;
+                                }
+                                else { }
                             }
                             else { }
                             //保存xml
@@ -232,6 +244,8 @@ class MultiLoadedLayerSpliter
 
                             if (dsia.Count != 1||(dsia.Count == 1 && som>1))
                             {
+                                //记录图层序号
+                                int layernum = 0;
                                 //将每帧的第n元件提出来放在新图层里
                                 for (int t = 0; t < dsia.Count; t++)
                                 {
@@ -241,8 +255,8 @@ class MultiLoadedLayerSpliter
                                     XmlElement addDOMLayer = xmlDoc.CreateElement("DOMLayer", xmlDoc.DocumentElement.NamespaceURI);
                                     //预置addframes节点
                                     XmlElement addframes = xmlDoc.CreateElement("frames", xmlDoc.DocumentElement.NamespaceURI);
-                                    //设name为DOMLayer的name值
-                                    addDOMLayer.SetAttribute("name", DOMLayer.GetAttribute("name") + "_" + t);
+                                    //设name为DOMLayer的name值（此处会出现极大卡顿，暂无法修复）
+                                    addDOMLayer.SetAttribute("name", DOMLayer.GetAttribute("name") + "_" + layernum);
                                     //将addframes作为addDOMLayer的子节点
                                     addDOMLayer.AppendChild(addframes);
                                     //判断是否存在DOMSymbolInstance，以判定是否引用元件
@@ -301,6 +315,8 @@ class MultiLoadedLayerSpliter
                                     //保存xml
                                     xmlDoc.Save(NextFile.FullName);
                                     Console.WriteLine("已提取" + NextFile.Name.Substring(0, NextFile.Name.Length - 4) + "元件的" + DOMLayer.GetAttribute("name") + "图层的元件" + dsia[t].ToString() + "并新建图层");
+                                    //增加序号
+                                    layernum++;
                                     //新功能更新而停用//刷新数组
                                     //新功能更新而停用///dsia[t] = null;
                                     //判断是否重置t
@@ -316,10 +332,14 @@ class MultiLoadedLayerSpliter
                             //确定创建完毕并删除旧图层
                             if (dsia.Count != 0 && (dsia.Count != 1 || (dsia.Count == 1 && som > 1)))
                             {
-                                //移除旧图层
-                                root.FirstChild.FirstChild.FirstChild.RemoveChild(DOMLayer);
-                                //重置计数器
-                                a = 0;
+                                if(DOMLayer.GetElementsByTagName("DOMSymbolInstance").Count == 0)
+                                {
+                                    //移除旧图层
+                                    root.FirstChild.FirstChild.FirstChild.RemoveChild(DOMLayer);
+                                    //重置计数器
+                                    a = 0;
+                                }
+                                else { }
                             }
                             else { }
                             //保存xml

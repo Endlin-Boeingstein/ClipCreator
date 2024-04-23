@@ -47,6 +47,7 @@
     <Compile Include="AnimateClipReader.cs" />
     <Compile Include="ClipCreator.cs" />
     <Compile Include="DOMDocumentOverwriter.cs" />
+    <Compile Include="FileNameSort.cs" />
     <Compile Include="ImageClipCreator.cs" />
     <Compile Include="ImageClipReader.cs" />
     <Compile Include="JudgeJoF.cs" />

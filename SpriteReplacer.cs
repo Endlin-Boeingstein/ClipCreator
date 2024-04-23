@@ -43,8 +43,12 @@ class SpriteReplacer
             //新功能更新而停用///this.mr = srrs.mr;
             //创建路径文件夹实例
             DirectoryInfo TheFolder = new DirectoryInfo(Fpath);
+            //创建文件数组
+            FileInfo[] files = TheFolder.GetFiles();
+            //为文件数组排序
+            Array.Sort(files, new FileNameSort());
             //遍历文件夹内文件
-            foreach (FileInfo NextFile in TheFolder.GetFiles())
+            foreach (FileInfo NextFile in files)
             {
                 //判定是否存在引用位图的a元件
                 if(rsarecord.Contains(NextFile.Name.Substring(0, NextFile.Name.Length - 4)))
@@ -59,7 +63,7 @@ class SpriteReplacer
                             //替换DOMBitmapInstance为DOMSymbolInstance
                             xml = xml.Replace("DOMBitmapInstance", "DOMSymbolInstance");
                             //替换libraryItemName
-                            xml = xml.Replace((string)this.rsrecord[i], "i" + this.rsirecord.IndexOf((string)this.rsrecord[i]).ToString());
+                            xml = xml.Replace("\""+(string)this.rsrecord[i]+ "\"", "\"" + "i" + this.rsirecord.IndexOf((string)this.rsrecord[i]).ToString()+ "\"");
                             Console.WriteLine("元件" + "i" + this.rsirecord.IndexOf((string)this.rsrecord[i]).ToString() + "已替换" + "元件" + NextFile.Name.Substring(0, NextFile.Name.Length - 4) + "的位图" + (string)this.rsrecord[i]);
                         }
                         else

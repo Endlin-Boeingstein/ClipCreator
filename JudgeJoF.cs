@@ -33,8 +33,10 @@ class JudgeJoF
 		else if (s == "1")
 		{
 			cc.icr.ImageClipRead(Fpath + "\\LIBRARY");
-			cc.icc.ImageClipCreate(Fpath + "\\LIBRARY", cc.icr.irecord, cc.rs.rsrecord);
-			Select(Fpath);
+            //对引用被删除i元件的a元件进行删除20240307添加
+            cc.acr.AnimateClipRead(Fpath + "\\LIBRARY", cc.icr.delirecord);
+            cc.icc.ImageClipCreate(Fpath + "\\LIBRARY", cc.icr.irecord, cc.rs.rsrecord);
+            Select(Fpath);
 		}
 		else if (s == "2")
 		{
