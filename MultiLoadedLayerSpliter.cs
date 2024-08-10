@@ -87,6 +87,7 @@ class MultiLoadedLayerSpliter
                                 else { }
                             }
 
+                            //这里是检测要么一帧含多位图，要么每帧含不同位图//20240512注释
                             if (dbia.Count != 1||(dbia.Count == 1 && som>1))
                             {
                                 //记录图层序号
