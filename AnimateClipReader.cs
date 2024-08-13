@@ -265,11 +265,11 @@ class AnimateClipReader
                                     }
                                     else
                                     {
-                                        Console.WriteLine(NextFile.Name.Substring(0, NextFile.Name.Length - 4) + "元件引用不存在元件" + el.GetAttribute("libraryItemName") + "，已移除");
-                                        //插入空白记录
-                                        arecord[int.Parse(NextFile.Name.Substring(1, NextFile.Name.Length - 5))] = null;
-                                        //删除错误的元件
-                                        File.Delete(Fpath + "\\" + NextFile.Name);
+                                        Console.WriteLine(NextFile.Name.Substring(0, NextFile.Name.Length - 4) + "元件引用不存在元件" + el.GetAttribute("libraryItemName") + "，请注意");
+                                        //20240813废除//插入空白记录
+                                        //20240813废除///arecord[int.Parse(NextFile.Name.Substring(1, NextFile.Name.Length - 5))] = null;
+                                        //20240813废除//删除错误的元件
+                                        //20240813废除///File.Delete(Fpath + "\\" + NextFile.Name);
                                         break;
                                     }
                                 }
@@ -446,11 +446,11 @@ class AnimateClipReader
                                     //引用被删除i元件的情况20240304添加
                                     if (delirecord.Contains("i" + ianum.ToString()))
                                     {
-                                        Console.WriteLine(NextFile.Name.Substring(0, NextFile.Name.Length - 4) + "元件引用被删除元件" + el.GetAttribute("libraryItemName") + "，已移除");
-                                        //插入空白记录
-                                        arecord[int.Parse(NextFile.Name.Substring(1, NextFile.Name.Length - 5))] = null;
-                                        //删除错误的元件
-                                        File.Delete(Fpath + "\\" + NextFile.Name);
+                                        Console.WriteLine(NextFile.Name.Substring(0, NextFile.Name.Length - 4) + "元件引用被删除元件" + el.GetAttribute("libraryItemName") + "，请注意");
+                                        //20240813废除//插入空白记录
+                                        //20240813废除///arecord[int.Parse(NextFile.Name.Substring(1, NextFile.Name.Length - 5))] = null;
+                                        //20240813废除//删除错误的元件
+                                        //20240813废除///File.Delete(Fpath + "\\" + NextFile.Name);
                                         break;
                                     }
                                     //正常引用记录
